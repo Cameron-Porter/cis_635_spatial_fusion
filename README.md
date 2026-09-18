@@ -53,6 +53,32 @@ Completed outputs:
 
 Two island ADM2 features, `Ilha Licom` and `Ilha Risunodo`, are retained with missing under-18 totals because they have no valid WorldPop raster cells in this product. These are treated as missing raster-support cases, not as zero population.
 
+WorldPop filename interpretation for the raster used in Milestone 1:
+
+- `moz` — Mozambique
+- `T` — total population across both sexes
+- `Under_18` — people under age 18
+- `2019` — represented year
+- `CN` — constrained estimate
+- `100m` — 3 arc-second grid, approximately 100m at the equator
+- `R2025A_v1` — WorldPop release/version
+
+The WorldPop source describes these data as estimated people per grid square, not density, so district-level `sum` zonal statistics are appropriate. The processed ADM2 table sums to approximately `15,339,674.46` estimated under-18 people across the 157 districts with valid raster support. The full source raster sums to approximately `15,350,762.00`, so the ADM2 aggregation captures about `99.93%` of the raster total; the remaining difference is a small boundary/raster-support discrepancy to document rather than silently impute.
+
+Citation for the under-age-18 raster product:
+
+> Bondarenko M., Priyatikanto R., Tejedor-Garavito N., Zhang W., McKeen T., Cunningham A., Woods T., Hilton J., Cihan D., Nosatiuk B., Brinkhoff T., Tatem A., Sorichetta A. Estimates of total number of people under the age of 18 years old and broken down by male and female for each year 2015-2030 at a resolution of 3 arc (approximately 100m at the equator) R2025A version v1. Global Demographic Data Project - Funded by The Bill and Melinda Gates Foundation (INV-045237). WorldPop - School of Geography and Environmental Science, University of Southampton. DOI:10.5258/SOTON/WP00847
+
+## Reproducible Environment
+
+Install the Python dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+The notebook workflow currently depends on GeoPandas, Rasterio, rasterstats, Shapely, pandas, NumPy, Matplotlib, Requests, JupyterLab, and ipykernel. The project also imports the local `childreach` package from `src/`, so notebooks should be run from the repository root or with the repository's `src/` directory on `PYTHONPATH`.
+
 ## Next Milestone
 
 Select and document a second vulnerability-relevant spatial dataset, then decide how it should be harmonized to the ADM2 analysis units before adding it to the fused dataset.

@@ -1,0 +1,14 @@
+# ChildReach reproducible analysis environment
+# Generated from the working virtual environment used to clean and verify notebooks.
+# Install with: python -m pip install -r requirements.txt
+
+geopandas==1.1.4
+rasterio==1.5.1
+rasterstats==0.21.0
+shapely==2.1.2
+pandas==3.0.6
+numpy==2.5.3
+matplotlib==3.11.2
+requests==2.34.2
+jupyterlab==4.6.3
+ipykernel==7.3.0

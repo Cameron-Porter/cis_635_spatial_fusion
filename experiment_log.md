@@ -24,3 +24,5 @@ Saved processed ADM2 + WorldPop under-18 outputs: spatial GeoPackage at `data/pr
 Read the processed outputs back from disk to verify reproducibility. The GeoPackage loaded with shape `(159, 9)` and CRS `EPSG:4326`; the CSV loaded with shape `(159, 8)`. The saved `worldpop_valid_cells` flag persisted correctly with 157 valid ADM2 features and 2 without valid WorldPop raster support.
 
 Created and saved the first ADM2 under-18 choropleth map at `figures/moz_adm2_under18_2019_choropleth.png`. File existence and size were verified from the notebook: `521,910` bytes. This completes the first end-to-end map artifact from the fused ADM2 boundary + WorldPop raster workflow.
+
+Milestone 1 closeout checks completed. Added `requirements.txt` from the working virtual environment so the notebook workflow can be recreated with pinned versions of GeoPandas, Rasterio, rasterstats, Shapely, pandas, NumPy, Matplotlib, Requests, JupyterLab, and ipykernel. Clarified `.gitignore` so notebook checkpoint directories are ignored as `notebooks/.ipynb_checkpoints/`.
