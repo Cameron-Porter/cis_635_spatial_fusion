@@ -1,3 +1,4 @@
 data/raw/worldpop/moz_under_age_18_2019_CN_100m_R2025A_v1.zip
 __pycache__/
 *.py[cod]
+notebooks/.ipynb_checkpoints/
