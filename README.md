@@ -32,9 +32,9 @@ The first fusion step summarizes raster population cells inside ADM2 district po
 
 Later project phases may add additional vulnerability indicators such as malnutrition, poverty, food insecurity, health access, or other humanitarian datasets. Those additions should be documented carefully before being incorporated into the final index or dashboard.
 
-## Current Milestone
+## Milestone 1: ADM2 + WorldPop Under-18 Population Fusion — Complete
 
-Build and understand a district-level map of Mozambique showing estimated population under age 18.
+The first completed milestone builds and validates a district-level map of Mozambique showing estimated population under age 18 for 2019.
 
 This milestone includes:
 
@@ -44,6 +44,18 @@ This milestone includes:
 - Using zonal statistics to aggregate raster population estimates by district
 - Handling NoData and missing raster-support cases transparently
 - Producing an initial district-level choropleth map
+
+Completed outputs:
+
+- `data/processed/moz_adm2_under18_2019.gpkg` — spatial ADM2 dataset with joined WorldPop under-18 estimates
+- `data/processed/moz_adm2_under18_2019.csv` — non-spatial table for inspection and reporting
+- `figures/moz_adm2_under18_2019_choropleth.png` — first district-level under-18 population map
+
+Two island ADM2 features, `Ilha Licom` and `Ilha Risunodo`, are retained with missing under-18 totals because they have no valid WorldPop raster cells in this product. These are treated as missing raster-support cases, not as zero population.
+
+## Next Milestone
+
+Select and document a second vulnerability-relevant spatial dataset, then decide how it should be harmonized to the ADM2 analysis units before adding it to the fused dataset.
 
 ## Planned Working Demo
 
