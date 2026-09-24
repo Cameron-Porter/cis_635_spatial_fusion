@@ -26,3 +26,23 @@ Read the processed outputs back from disk to verify reproducibility. The GeoPack
 Created and saved the first ADM2 under-18 choropleth map at `figures/moz_adm2_under18_2019_choropleth.png`. File existence and size were verified from the notebook: `521,910` bytes. This completes the first end-to-end map artifact from the fused ADM2 boundary + WorldPop raster workflow.
 
 Milestone 1 closeout checks completed. Added `requirements.txt` from the working virtual environment so the notebook workflow can be recreated with pinned versions of GeoPandas, Rasterio, rasterstats, Shapely, pandas, NumPy, Matplotlib, Requests, JupyterLab, and ipykernel. Clarified `.gitignore` so notebook checkpoint directories are ignored as `notebooks/.ipynb_checkpoints/`.
+
+## 2026-09-21
+
+Started the IPC acute food insecurity vulnerability layer in `notebooks/10_inspect_ipc_food_insecurity.ipynb`.
+
+Inspected the latest Mozambique IPC files from HDX. The latest/current layer covers 46 of 159 ADM2 rows after joining to the existing ADM2 + WorldPop baseline. Those 46 covered rows contain about 3,791,669.94 of the 15,339,674.46 estimated under-18 population in the 2019 baseline, or about 24.72%. This makes the latest 2026 IPC layer useful as a recency comparison but too incomplete for the main national report layer.
+
+Inspected the HDX all-area IPC wide file and identified the November 2022 current analysis period (`2022-10-01` to `2023-03-31`) as the broadest report-safe option found so far. The filtered 2022 table contains 159 IPC area rows, matching the ADM2 row count, but diagnostic name matching showed the spatial units are not perfectly identical.
+
+Applied only conservative one-to-one name crosswalks for city and spelling variants before joining IPC to ADM2. The safe 2022 join matched 145 of 159 ADM2 rows to IPC area records. The processed output `data/processed/moz_adm2_under18_ipc_2022_safe.csv` has shape `(159, 18)`, and 137 rows have a non-missing `Phase 3+ percentage current` metric. Unmatched rows and non-comparable IPC units were retained as missing rather than interpreted as zero food insecurity.
+
+Cleaned and validated notebook 10 for handoff. The notebook now uses section-level markdown cells consistent with the earlier notebooks, preserves the 2026-to-2022 source-selection narrative, and removes redundant exploratory inspection cells. Validation showed valid notebook JSON, zero remaining non-breaking spaces, zero replacement characters, no Python syntax errors, 14 markdown cells, 40 code cells, and 0 raw cells. Full `nbconvert --execute` passed, and no temporary `*executed_check*` notebook remains.
+
+Current IPC outputs for mapping/dashboard work:
+
+- `data/processed/moz_adm2_under18_ipc_current.csv` — latest IPC comparison output, shape `(159, 16)`, 46 rows with latest IPC data.
+- `data/processed/moz_adm2_under18_ipc_2022_safe.csv` — main safe 2022 IPC layer, shape `(159, 18)`, 145 matched IPC area records, 137 non-missing Phase 3+ metric rows.
+- `figures/moz_ipc_phase3plus_current_2026.png` — latest IPC comparison figure.
+
+Next I'll focus on static map design, then a lightweight dashboard/demo. Keeping the safe 2022 IPC layer as the main vulnerability layer; the 2026 layer will remain a documented latest-but-partial comparison.
