@@ -30,7 +30,7 @@ ChildReach starts by combining at least two spatial data sources:
 
 The first fusion step summarizes raster population cells inside ADM2 district polygons using zonal statistics. This creates a district-level table and map of estimated children under 18.
 
-Later project phases may add additional vulnerability indicators such as malnutrition, poverty, food insecurity, health access, or other humanitarian datasets. Those additions should be documented carefully before being incorporated into the final index or dashboard.
+Milestone 2 adds an IPC acute food insecurity layer. The newest available IPC snapshot was inspected first, but it covers only part of the country, so the broader November 2022 IPC period is used as the main report-safe vulnerability layer.
 
 ## Milestone 1: ADM2 + WorldPop Under-18 Population Fusion — Complete
 
@@ -69,6 +69,23 @@ Citation for the under-age-18 raster product:
 
 > Bondarenko M., Priyatikanto R., Tejedor-Garavito N., Zhang W., McKeen T., Cunningham A., Woods T., Hilton J., Cihan D., Nosatiuk B., Brinkhoff T., Tatem A., Sorichetta A. Estimates of total number of people under the age of 18 years old and broken down by male and female for each year 2015-2030 at a resolution of 3 arc (approximately 100m at the equator) R2025A version v1. Global Demographic Data Project - Funded by The Bill and Melinda Gates Foundation (INV-045237). WorldPop - School of Geography and Environmental Science, University of Southampton. DOI:10.5258/SOTON/WP00847
 
+## Milestone 2: IPC Acute Food Insecurity Layer — Current Handoff
+
+The second milestone inspects Mozambique IPC acute food insecurity data and prepares a district-level vulnerability layer for later maps and dashboard work.
+
+The project first evaluates the latest IPC snapshot because it is the most current. That July 2026 layer covers 46 of 159 ADM2 records, representing about 24.72% of the 2019 under-18 population in the existing ADM2 + WorldPop baseline. Because this leaves most districts without IPC coverage, the latest layer is retained as methodological evidence but not used as the main national layer.
+
+For broader spatial representation, the workflow then uses the HDX all-area IPC file and filters to the November 2022 current analysis period (`2022-10-01` to `2023-03-31`). That period contains 159 IPC area records. Diagnostic matching showed that IPC areas and geoBoundaries ADM2 names are not perfectly identical, so the notebook applies only conservative one-to-one name crosswalks for city and spelling variants. The safe join matches 145 of 159 ADM2 rows to IPC area records, and 137 rows have a non-missing `Phase 3+ percentage current` metric. Unmatched or non-comparable rows are retained as missing values rather than assumed to have zero food insecurity.
+
+Milestone 2 outputs:
+
+- `notebooks/10_inspect_ipc_food_insecurity.ipynb` — cleaned, executable notebook documenting the 2026 latest-data check, the 2022 broader-coverage decision, and the safe IPC-to-ADM2 join.
+- `data/processed/moz_adm2_under18_ipc_current.csv` — July 2026 latest IPC comparison output, shape `(159, 16)`.
+- `data/processed/moz_adm2_under18_ipc_2022_safe.csv` — November 2022 safe IPC join output, shape `(159, 18)`.
+- `figures/moz_ipc_phase3plus_current_2026.png` — latest IPC comparison figure.
+
+The IPC layer should be described as an area-level acute food insecurity indicator, not a child-specific food insecurity count. The exploratory exposure proxy multiplies district under-18 population by the IPC Phase 3+ fraction and should be interpreted as a prioritization/support indicator, not a precise estimate of food-insecure children.
+
 ## Reproducible Environment
 
 Install the Python dependencies with:
@@ -81,7 +98,7 @@ The notebook workflow currently depends on GeoPandas, Rasterio, rasterstats, Sha
 
 ## Next Milestone
 
-Select and document a second vulnerability-relevant spatial dataset, then decide how it should be harmonized to the ADM2 analysis units before adding it to the fused dataset.
+Create final map outputs and a lightweight dashboard/demo from the validated ADM2 + WorldPop + IPC layers. The next working step should start with static map design before building dashboard interactivity.
 
 ## Planned Working Demo
 
