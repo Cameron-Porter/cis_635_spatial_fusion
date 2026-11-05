@@ -1,5 +1,4 @@
-# ChildReach reproducible analysis environment
-# Generated from the working virtual environment used to clean and verify notebooks.
+# ChildReach reproducible analysis and saved-data dashboard environment
 # Install with: python -m pip install -r requirements.txt
 
 geopandas==1.1.4
@@ -15,3 +14,4 @@ branca
 requests==2.34.2
 jupyterlab==4.6.3
 ipykernel==7.3.0
+streamlit==1.66.1
