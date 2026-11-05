@@ -108,10 +108,6 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 The map command regenerates the two PNG files above. The app inserts `src/` into its own import path; the module command and tests need `PYTHONPATH=src`. No notebook execution or raw raster download is needed for the maps or app when the saved processed files are present. Rebuilding upstream data from notebooks needs the raw inputs. The requirements also cover notebook dependencies (GeoPandas, Rasterio, rasterstats, Shapely, pandas, NumPy, Matplotlib, Requests, JupyterLab, and ipykernel).
 
-## Remaining Work
-
-The final report/paper and presentation/slides are still pending. The demo is a decision-support and learning tool, not an automated aid-allocation system.
-
 ## Project Structure
 
 ```text
