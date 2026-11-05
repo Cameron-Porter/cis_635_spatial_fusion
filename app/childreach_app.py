@@ -107,8 +107,9 @@ def main():
                 st.write(f"**{label}:** {displayed}")
         st.subheader("Highest exposure proxies")
         n = st.slider("Top N comparable districts", 5, 30, 10)
-        st.dataframe(top_proxy(data, n).rename(columns={PROXY: "Exposure proxy (estimated)"}),
-                     hide_index=True)
+        st.table(top_proxy(data, n)[["shapeName", PROXY]].rename(columns={
+            "shapeName": "District", PROXY: "Exposure proxy (estimated)",
+        }))
         st.caption("Ranked proxy, not a count of measured food-insecure children or a needs priority score.")
 
     st.markdown("""### Sources and limits
